@@ -27,15 +27,6 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
-      restaurantCategoryId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'RestaurantCategories'
-          },
-          key: 'id'
-        }
-      },
       shippingCosts: {
         allowNull: false,
         type: Sequelize.DOUBLE
@@ -84,8 +75,34 @@ module.exports = {
       averageServiceMinutes: {
         allowNull: true,
         type: Sequelize.DOUBLE
+      },
+      restaurantCategoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'RestaurantCategories'
+          },
+          key: 'id'
+        }
+      },
+      productId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Products'
+          },
+          key: 'id'
+        }
+      },
+      orderId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Orders'
+          },
+          key: 'id'
+        }
       }
-      // quedan por añadir las foreign key
     })
   },
   down: async (queryInterface, Sequelize) => {
