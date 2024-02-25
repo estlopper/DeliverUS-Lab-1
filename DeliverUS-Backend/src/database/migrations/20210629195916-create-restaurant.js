@@ -54,16 +54,6 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Users'
-          },
-          key: 'id'
-        }
-      },
       status: {
         type: Sequelize.ENUM,
         values: ['online', 'offline', 'closed', 'temporally closed']
@@ -77,6 +67,7 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       restaurantCategoryId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -85,6 +76,16 @@ module.exports = {
           key: 'id'
         }
       },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users'
+          },
+          key: 'id'
+        }
+      }/*,
       productId: {
         type: Sequelize.INTEGER,
         references: {
@@ -102,7 +103,7 @@ module.exports = {
           },
           key: 'id'
         }
-      }
+      } */
     })
   },
   down: async (queryInterface, Sequelize) => {
