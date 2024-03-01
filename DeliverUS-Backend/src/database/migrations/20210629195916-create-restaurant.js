@@ -7,12 +7,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      // TODO: Include the rest of the fields of the Restaurants table
       name: {
         allowNull: false,
         type: Sequelize.STRING
       },
       description: {
-        allowNull: true,
         type: Sequelize.STRING
       },
       address: {
@@ -24,25 +24,30 @@ module.exports = {
         type: Sequelize.STRING
       },
       url: {
-        allowNull: true,
         type: Sequelize.STRING
       },
       shippingCosts: {
         allowNull: false,
         type: Sequelize.DOUBLE
       },
-      email: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        unique: true
+      averageServiceMinutes: {
+        type: Sequelize.DOUBLE
       },
-      logo: {
-        allowNull: true,
+      email: {
         type: Sequelize.STRING
       },
       phone: {
-        allowNull: false,
         type: Sequelize.STRING
+      },
+      logo: {
+        type: Sequelize.STRING
+      },
+      heroImage: {
+        type: Sequelize.STRING
+      },
+      status: {
+        allowNull: false,
+        type: Sequelize.ENUM('online', 'offline', 'closed', 'temporarily closed')
       },
       createdAt: {
         allowNull: false,
@@ -54,20 +59,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       },
-      status: {
-        type: Sequelize.ENUM,
-        values: ['online', 'offline', 'closed', 'temporally closed']
-      },
-      heroImage: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      averageServiceMinutes: {
-        allowNull: true,
-        type: Sequelize.DOUBLE
-      },
       restaurantCategoryId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -77,7 +69,6 @@ module.exports = {
         }
       },
       userId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -85,29 +76,10 @@ module.exports = {
           },
           key: 'id'
         }
-      }/*,
-      productId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Products'
-          },
-          key: 'id'
-        }
-      },
-      orderId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Orders'
-          },
-          key: 'id'
-        }
-      } */
+      }
     })
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Restaurants')
   }
-
 }
